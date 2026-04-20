@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teknologi og Innovasjon – Dark Design Group</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>* { margin: 0; padding: 0; box-sizing: border-box; } html, body, #root { height: 100%; }</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<script type="text/babel">
+const { useState } = React;
+
+// ─── GLOBAL DATA ────────────────────────────────────────────
+
+const ALL_DOCS = [
+  { id: 1, site: "bim", category: "Standards", title: "BIM Execution Plan Template", type: "docx", updated: "12 Feb 2025", author: "Dark Arkitekter", size: "245 KB" },
+  { id: 2, site: "bim", category: "Standards", title: "LOD Matrix — Dark Group Standard", type: "docx", updated: "3 Jan 2025", author: "HK Arkitekter", size: "180 KB" },
+  { id: 3, site: "bim", category: "Standards", title: "Revit Template v3.2 — Dark Arkitekter", type: "rvt", updated: "20 Jan 2025", author: "Dark Arkitekter", size: "14.2 MB" },
+  { id: 4, site: "bim", category: "Workflows", title: "Dynamo Script Library", type: "pdf", updated: "10 Feb 2025", author: "Dark Arkitekter", size: "3.1 MB" },
+  { id: 5, site: "bim", category: "Workflows", title: "Grasshopper Component Standards", type: "pdf", updated: "5 Dec 2024", author: "Lark Landskap", size: "1.8 MB" },
+  { id: 6, site: "bim", category: "Guides", title: "Twinmotion Integration Guide", type: "pdf", updated: "8 Feb 2025", author: "Zinc Interior", size: "890 KB" },
+  { id: 7, site: "ai", category: "Governance", title: "AI Privacy & Data Protection Guide", type: "pdf", updated: "18 Feb 2025", author: "Innovation & Technology", size: "420 KB" },
+  { id: 8, site: "ai", category: "Governance", title: "Approved Tools Register", type: "docx", updated: "18 Feb 2025", author: "Innovation & Technology", size: "95 KB" },
+  { id: 9, site: "ai", category: "Governance", title: "Incident Reporting Procedure", type: "docx", updated: "1 Feb 2025", author: "Innovation & Technology", size: "78 KB" },
+  { id: 10, site: "ai", category: "Templates", title: "Project Anonymisation Checklist", type: "docx", updated: "14 Feb 2025", author: "Innovation & Technology", size: "62 KB" },
+  { id: 11, site: "ai", category: "Templates", title: "AI Disclosure Label — Client Deliverables", type: "docx", updated: "20 Jan 2025", author: "Zinc Interior", size: "44 KB" },
+  { id: 12, site: "it", category: "Infrastructure", title: "Microsoft 365 Onboarding Guide", type: "pdf", updated: "5 Feb 2025", author: "IT Department", size: "1.2 MB" },
+  { id: 13, site: "it", category: "Infrastructure", title: "VPN & Remote Access Policy", type: "pdf", updated: "10 Jan 2025", author: "IT Department", size: "340 KB" },
+  { id: 14, site: "it", category: "Software", title: "Licensed Software Register 2025", type: "xlsx", updated: "15 Feb 2025", author: "IT Department", size: "210 KB" },
+  { id: 15, site: "it", category: "Software", title: "Device Management Policy", type: "pdf", updated: "22 Jan 2025", author: "IT Department", size: "290 KB" },
+];
+
+const COURSES = [
+  { id: 1, week: 1, level: "Beginner", tag: "Foundations", title: "AI Privacy & Data Classification", desc: "Understand the four-level data classification system and how it governs all AI tool usage.", duration: "40 min", enrolled: 98, isNew: true, category: "governance" },
+  { id: 2, week: 2, level: "Intermediate", tag: "Practical", title: "Prompt Engineering for Architects", desc: "Write precise, anonymous prompts that protect project data while getting high-quality outputs.", duration: "35 min", enrolled: 74, isNew: true, category: "tools" },
+  { id: 3, week: 3, level: "Intermediate", tag: "Compliance", title: "GDPR & AI: What Every Designer Must Know", desc: "A practical walk through GDPR obligations and Datatilsynet expectations.", duration: "50 min", enrolled: 61, isNew: false, category: "governance" },
+  { id: 4, week: 4, level: "Beginner", tag: "Tools", title: "Evaluating AI Tools: The Five Questions", desc: "Master the independent tool evaluation framework. Never wait for IT approval again.", duration: "30 min", enrolled: 88, isNew: false, category: "tools" },
+  { id: 5, week: 5, level: "Advanced", tag: "BIM", title: "AI in Revit & Autodesk Forma", desc: "Generative design, AI analysis features, and what data leaves your machine when you enable them.", duration: "55 min", enrolled: 43, isNew: false, category: "bim" },
+  { id: 6, week: 6, level: "Intermediate", tag: "Creative", title: "Image Generation for Concept Design", desc: "Using Midjourney and Adobe Firefly responsibly: anonymisation strategies and best results.", duration: "45 min", enrolled: 56, isNew: false, category: "tools" },
+];
+
+const SITES = {
+  hub: { id: "hub", label: "Teknologi og Innovasjon", short: "Hub", color: "#2A2520" },
+  bim: { id: "bim", label: "BIM x Dark", short: "BIM", color: "#3D5A4A" },
+  ai: { id: "ai", label: "AI x Dark", short: "AI", color: "#4A3D5A" },
+  it: { id: "it", label: "IT x Dark", short: "IT", color: "#3D4A5A" },
+  learning: { id: "learning", label: "Learning Platform", short: "Learn", color: "#5A3D3D" },
+};
+
+const NEWS = [
+  { site: "ai", title: "AI Privacy Guide v1.0 distributed to all studios", date: "18 Feb 2025", tag: "AI x Dark" },
+  { site: "bim", title: "Revit Template updated to v3.2 — please update your local files", date: "20 Jan 2025", tag: "BIM x Dark" },
+  { site: "learning", title: "Week 2 course live: Prompt Engineering for Architects", date: "17 Feb 2025", tag: "Learning" },
+  { site: "it", title: "Licensed Software Register updated for 2025", date: "15 Feb 2025", tag: "IT x Dark" },
+];
+
+const fileTypeColor = { pdf: "#C0392B", docx: "#2E6DB4", rvt: "#E87722", xlsx: "#1E7145", default: "#888" };
+
+// ─── COMPONENT ──────────────────────────────────────────────
+
+export default function App() {
+  const [activeSite, setActiveSite] = useState("hub");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchFocused, setSearchFocused] = useState(false);
+  const [courseFilter, setCourseFilter] = useState("all");
+  const [wikiFilter, setWikiFilter] = useState("all");
+  const [learningTab, setLearningTab] = useState("courses");
+
+  const searchResults = searchQuery.length > 1
+    ? [
+        ...ALL_DOCS.filter(d =>
+          d.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          d.category.toLowerCase().includes(searchQuery.toLowerCase())
+        ).map(d => ({ ...d, kind: "doc" })),
+        ...COURSES.filter(c =>
+          c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          c.desc.toLowerCase().includes(searchQuery.toLowerCase())
+        ).map(c => ({ ...c, kind: "course" })),
+      ]
+    : [];
+
+  const siteDocs = ALL_DOCS.filter(d => d.site === activeSite);
+  const categories = [...new Set(siteDocs.map(d => d.category))];
+
+  return (
+    <div style={s.root}>
+      <style>{css}</style>
+
+      {/* ── TOP NAV (SharePoint-style global bar) ── */}
+      <div style={s.globalBar}>
+        <div style={s.globalBarInner}>
+          <div style={s.globalLogo}>
+            <div style={s.globalLogoMark}>DDG</div>
+            <span style={s.globalLogoText}>Dark Design Group</span>
+          </div>
+          <div style={{ flex: 1, maxWidth: 560, position: "relative" }}>
+            <div style={{ ...s.globalSearch, ...(searchFocused ? s.globalSearchFocused : {}) }}>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+                <circle cx="9" cy="9" r="6" stroke="#999" strokeWidth="1.5" />
+                <path d="M14 14l3 3" stroke="#999" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+              <input
+                style={s.globalSearchInput}
+                placeholder="Search across all sites…"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                onFocus={() => setSearchFocused(true)}
+                onBlur={() => setTimeout(() => setSearchFocused(false), 200)}
+              />
+              {searchQuery && (
+                <button style={s.clearBtn} onClick={() => setSearchQuery("")}>×</button>
+              )}
+            </div>
+            {searchFocused && searchQuery.length > 1 && (
+              <div style={s.searchDropdown}>
+                {searchResults.length === 0 ? (
+                  <div style={s.searchEmpty}>No results for "{searchQuery}"</div>
+                ) : (
+                  searchResults.map((r, i) => (
+                    <div key={i} style={s.searchResult} className="search-result"
+                      onClick={() => { setActiveSite(r.site || "learning"); setSearchQuery(""); }}>
+                      <div style={{ ...s.searchResultIcon, background: r.kind === "course" ? "#F4F1EA" : "#F0F4EE" }}>
+                        {r.kind === "course" ? "▶" : "↗"}
+                      </div>
+                      <div>
+                        <div style={s.searchResultTitle}>{r.title}</div>
+                        <div style={s.searchResultMeta}>
+                          {r.kind === "course" ? "Course · Learning Platform" : `${r.category} · ${SITES[r.site]?.label}`}
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
+          </div>
+          <div style={s.globalUser}>
+            <div style={s.avatar}>MM</div>
+            <span style={s.globalUserName}>Maria Makri</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── SITE NAV ── */}
+      <div style={s.siteNav}>
+        <div style={s.siteNavInner}>
+          {Object.values(SITES).map(site => (
+            <button
+              key={site.id}
+              style={{ ...s.siteNavItem, ...(activeSite === site.id ? { ...s.siteNavItemActive, borderBottomColor: site.color } : {}) }}
+              onClick={() => setActiveSite(site.id)}
+            >
+              <div style={{ ...s.siteNavDot, background: activeSite === site.id ? site.color : "#D4CFC8" }} />
+              {site.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════
+          HUB SITE
+      ══════════════════════════════════════════ */}
+      {activeSite === "hub" && (
+        <main style={s.main}>
+          {/* Hero */}
+          <div style={s.hubHero}>
+            <div style={s.hubHeroContent}>
+              <div style={s.eyebrow}>Dark Design Group</div>
+              <h1 style={s.hubTitle}>Teknologi og Innovasjon</h1>
+              <p style={s.hubSub}>The central knowledge hub for BIM, AI governance, IT infrastructure, and team learning — across all four studios.</p>
+            </div>
+            <div style={s.hubHeroGrid}>
+              {["Dark Arkitekter", "Lark Landskap", "Zinc Interior", "HK Arkitekter"].map(s2 => (
+                <div key={s2} style={s.studioChip}>{s2}</div>
+              ))}
+            </div>
+          </div>
+
+          {/* 4 site cards */}
+          <div style={s.hubCards}>
+            {[
+              { site: SITES.bim, icon: "⬡", desc: "Standards, templates, Revit files, and scripting documentation.", docs: ALL_DOCS.filter(d => d.site === "bim").length },
+              { site: SITES.ai, icon: "◈", desc: "AI governance, approved tools register, and GDPR compliance.", docs: ALL_DOCS.filter(d => d.site === "ai").length },
+              { site: SITES.it, icon: "◻", desc: "Infrastructure policies, software licensing, and device management.", docs: ALL_DOCS.filter(d => d.site === "it").length },
+              { site: SITES.learning, icon: "◎", desc: "Weekly AI mini-courses and firm-wide training programme.", docs: COURSES.length },
+            ].map(({ site, icon, desc, docs }) => (
+              <div key={site.id} style={{ ...s.hubCard }} className="hub-card" onClick={() => setActiveSite(site.id)}>
+                <div style={{ ...s.hubCardAccent, background: site.color }} />
+                <div style={s.hubCardIcon}>{icon}</div>
+                <div style={s.hubCardTitle}>{site.label}</div>
+                <div style={s.hubCardDesc}>{desc}</div>
+                <div style={s.hubCardFooter}>
+                  <span style={s.hubCardCount}>{docs} {site.id === "learning" ? "courses" : "documents"}</span>
+                  <span style={{ ...s.hubCardArrow }}>→</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* News feed */}
+          <div style={s.hubSection}>
+            <div style={s.sectionHeader}>
+              <div style={s.sectionLine} />
+              <span style={s.sectionLabel}>Recent Updates</span>
+            </div>
+            {NEWS.map((n, i) => (
+              <div key={i} style={s.newsItem} className="news-item" onClick={() => setActiveSite(n.site)}>
+                <div style={{ ...s.newsTag, background: SITES[n.site]?.color + "18", color: SITES[n.site]?.color }}>{n.tag}</div>
+                <div style={s.newsTitle}>{n.title}</div>
+                <div style={s.newsMeta}>{n.date}</div>
+              </div>
+            ))}
+          </div>
+        </main>
+      )}
+
+      {/* ══════════════════════════════════════════
+          BIM + AI + IT SITES (document libraries)
+      ══════════════════════════════════════════ */}
+      {(activeSite === "bim" || activeSite === "ai" || activeSite === "it") && (
+        <main style={s.main}>
+          <div style={s.siteHero}>
+            <div style={{ ...s.siteHeroAccent, background: SITES[activeSite].color }} />
+            <div>
+              <div style={s.eyebrow}>Teknologi og Innovasjon</div>
+              <h1 style={s.siteTitle}>{SITES[activeSite].label}</h1>
+              <p style={s.siteSub}>
+                {activeSite === "bim" && "BIM standards, Revit templates, scripting documentation, and workflow guides for all studios."}
+                {activeSite === "ai" && "AI governance framework, approved tools register, GDPR compliance materials, and templates."}
+                {activeSite === "it" && "IT infrastructure policies, software licensing, device management, and onboarding guides."}
+              </p>
+            </div>
+          </div>
+
+          <div style={s.docLayout}>
+            {/* Sidebar */}
+            <aside style={s.docSidebar}>
+              <div style={s.sidebarLabel}>Categories</div>
+              <div style={{ ...s.sidebarAll, ...(wikiFilter === "all" ? s.sidebarAllActive : {}) }}
+                onClick={() => setWikiFilter("all")}>
+                All documents
+                <span style={s.sidebarCount}>{siteDocs.length}</span>
+              </div>
+              {categories.map(cat => (
+                <div key={cat}
+                  style={{ ...s.sidebarCat, ...(wikiFilter === cat ? s.sidebarCatActive : {}) }}
+                  onClick={() => setWikiFilter(cat)}>
+                  <div style={{ ...s.sidebarDot2, background: SITES[activeSite].color }} />
+                  {cat}
+                  <span style={s.sidebarCount}>{siteDocs.filter(d => d.category === cat).length}</span>
+                </div>
+              ))}
+            </aside>
+
+            {/* Doc list */}
+            <div>
+              {(wikiFilter === "all" ? categories : [wikiFilter]).map(cat => {
+                const docs = siteDocs.filter(d => d.category === cat);
+                return (
+                  <div key={cat} style={{ marginBottom: 32 }}>
+                    <div style={s.docCatHeader}>
+                      <div style={{ ...s.docCatLine, background: SITES[activeSite].color }} />
+                      <span style={s.docCatLabel}>{cat}</span>
+                    </div>
+                    {docs.map(doc => (
+                      <div key={doc.id} style={s.docRow} className="doc-row">
+                        <div style={{ ...s.fileType, background: (fileTypeColor[doc.type] || fileTypeColor.default) + "18", color: fileTypeColor[doc.type] || fileTypeColor.default }}>
+                          {doc.type.toUpperCase()}
+                        </div>
+                        <div style={{ flex: 1 }}>
+                          <div style={s.docTitle}>{doc.title}</div>
+                          <div style={s.docMeta}>{doc.author} · {doc.updated} · {doc.size}</div>
+                        </div>
+                        <button style={s.docBtn} className="doc-btn">Open ↗</button>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </main>
+      )}
+
+      {/* ══════════════════════════════════════════
+          LEARNING PLATFORM
+      ══════════════════════════════════════════ */}
+      {activeSite === "learning" && (
+        <main style={s.main}>
+          <div style={s.siteHero}>
+            <div style={{ ...s.siteHeroAccent, background: SITES.learning.color }} />
+            <div>
+              <div style={s.eyebrow}>Teknologi og Innovasjon</div>
+              <h1 style={s.siteTitle}>Dark Academy</h1>
+              <p style={s.siteSub}>Weekly AI mini-courses designed for architects, landscape architects, and interior designers across all studios.</p>
+            </div>
+          </div>
+
+          {/* Tabs */}
+          <div style={s.tabs}>
+            {["courses", "progress"].map(tab => (
+              <button key={tab} style={{ ...s.tab, ...(learningTab === tab ? s.tabActive : {}) }}
+                onClick={() => setLearningTab(tab)}>
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </button>
+            ))}
+          </div>
+
+          {learningTab === "courses" && (
+            <>
+              <div style={s.filterRow}>
+                {["all", "governance", "tools", "bim"].map(f => (
+                  <button key={f} style={{ ...s.pill, ...(courseFilter === f ? s.pillActive : {}) }}
+                    onClick={() => setCourseFilter(f)}>
+                    {f === "bim" ? "BIM & Design" : f.charAt(0).toUpperCase() + f.slice(1)}
+                  </button>
+                ))}
+              </div>
+              <div style={s.courseGrid}>
+                {COURSES.filter(c => courseFilter === "all" || c.category === courseFilter).map(c => (
+                  <div key={c.id} style={s.courseCard} className="course-card">
+                    <div style={{ ...s.courseVis, background: `linear-gradient(145deg, ${SITES.learning.color} 0%, #7A5A5A 100%)` }}>
+                      <span style={s.weekBadge}>Week {c.week}</span>
+                      {c.isNew && <span style={s.newBadge}>New</span>}
+                    </div>
+                    <div style={s.courseBody}>
+                      <div style={s.courseMeta}>
+                        <span style={{ ...s.levelBadge, ...levelStyle(c.level) }}>{c.level}</span>
+                        <span style={s.courseTag}>{c.tag}</span>
+                      </div>
+                      <div style={s.courseTitle}>{c.title}</div>
+                      <div style={s.courseDesc}>{c.desc}</div>
+                      <div style={s.courseFooter}>
+                        <span style={s.courseStat}>{c.duration}</span>
+                        <span style={s.courseStat}>{c.enrolled} enrolled</span>
+                        <button style={s.startBtn} className="start-btn">Start →</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {learningTab === "progress" && (
+            <div style={{ maxWidth: 600 }}>
+              <div style={s.progressCards}>
+                {[{ n: "4", l: "Completed" }, { n: "2h 30m", l: "Learning time" }, { n: "67%", l: "Progress" }].map((p, i) => (
+                  <div key={i} style={s.progressCard}>
+                    <div style={s.progressNum}>{p.n}</div>
+                    <div style={s.progressLbl}>{p.l}</div>
+                  </div>
+                ))}
+              </div>
+              {COURSES.slice(0, 4).map((c, i) => {
+                const pct = [100, 100, 68, 0][i];
+                return (
+                  <div key={c.id} style={{ marginBottom: 18 }}>
+                    <div style={s.barLabel}>
+                      <span style={{ fontSize: 13, color: "#6B6560" }}>{c.title}</span>
+                      <span style={{ fontSize: 11, color: "#A09880" }}>{pct === 100 ? "Completed" : pct === 0 ? "Not started" : `${pct}%`}</span>
+                    </div>
+                    <div style={s.barTrack}>
+                      <div style={{ ...s.barFill, width: `${pct}%`, background: SITES.learning.color }} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </main>
+      )}
+
+      {/* ── FOOTER ── */}
+      <footer style={s.footer}>
+        <div style={s.footerInner}>
+          <span>Teknologi og Innovasjon · Dark Design Group</span>
+          <span style={{ color: "#BBB5AC" }}>Dark Arkitekter · Lark Landskap · Zinc Interior · HK Arkitekter</span>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+function levelStyle(level) {
+  return {
+    Beginner:     { background: "#F0F4EE", color: "#3A5A32" },
+    Intermediate: { background: "#F4F1EA", color: "#6B4F1E" },
+    Advanced:     { background: "#F5EEEE", color: "#7A2E2E" },
+  }[level] || {};
+}
+
+// ─── STYLES ─────────────────────────────────────────────────
+
+const s = {
+  root: { fontFamily: "'DM Sans', system-ui, sans-serif", background: "#F8F6F2", color: "#2A2520", minHeight: "100vh", display: "flex", flexDirection: "column" },
+  globalBar: { background: "#1A1613", borderBottom: "1px solid #2E2825" },
+  globalBarInner: { maxWidth: 1200, margin: "0 auto", padding: "0 28px", height: 52, display: "flex", alignItems: "center", gap: 24 },
+  globalLogo: { display: "flex", alignItems: "center", gap: 10, flexShrink: 0 },
+  globalLogoMark: { background: "#C8B89A", color: "#1A1613", fontSize: 10, fontWeight: 700, letterSpacing: "0.04em", padding: "4px 7px", borderRadius: 3 },
+  globalLogoText: { color: "#E8E4DE", fontSize: 13, letterSpacing: "0.02em" },
+  globalSearch: { display: "flex", alignItems: "center", gap: 8, background: "#2E2825", border: "1px solid #3A3530", borderRadius: 6, padding: "0 12px", height: 36, transition: "border-color 0.2s" },
+  globalSearchFocused: { borderColor: "#C8B89A" },
+  globalSearchInput: { border: "none", outline: "none", background: "none", color: "#E8E4DE", fontSize: 13, width: "100%", fontFamily: "inherit" },
+  clearBtn: { background: "none", border: "none", color: "#888", cursor: "pointer", fontSize: 16, padding: "0 2px" },
+  globalUser: { display: "flex", alignItems: "center", gap: 8, marginLeft: "auto", flexShrink: 0 },
+  avatar: { width: 28, height: 28, borderRadius: "50%", background: "#C8B89A", color: "#1A1613", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 700 },
+  globalUserName: { color: "#C8B89A", fontSize: 12 },
+  searchDropdown: { position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0, background: "#fff", border: "1px solid #E0DCD6", borderRadius: 8, boxShadow: "0 8px 32px rgba(0,0,0,0.12)", zIndex: 999, overflow: "hidden" },
+  searchEmpty: { padding: "16px 16px", fontSize: 13, color: "#999", textAlign: "center" },
+  searchResult: { display: "flex", alignItems: "center", gap: 12, padding: "10px 14px", cursor: "pointer", borderBottom: "1px solid #F0ECE6" },
+  searchResultIcon: { width: 28, height: 28, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, flexShrink: 0 },
+  searchResultTitle: { fontSize: 13, color: "#2A2520", marginBottom: 2 },
+  searchResultMeta: { fontSize: 11, color: "#A09880" },
+  siteNav: { background: "#FAFAF8", borderBottom: "1px solid #E8E4DE", position: "sticky", top: 0, zIndex: 90 },
+  siteNavInner: { maxWidth: 1200, margin: "0 auto", padding: "0 28px", display: "flex", gap: 0 },
+  siteNavItem: { background: "none", border: "none", borderBottom: "2px solid transparent", cursor: "pointer", padding: "14px 18px", fontSize: 13, color: "#888", display: "flex", alignItems: "center", gap: 7, fontFamily: "inherit", transition: "color 0.15s", whiteSpace: "nowrap" },
+  siteNavItemActive: { color: "#2A2520", fontWeight: 500 },
+  siteNavDot: { width: 6, height: 6, borderRadius: "50%", transition: "background 0.15s" },
+  main: { maxWidth: 1200, margin: "0 auto", padding: "0 28px 80px", width: "100%" },
+  // Hub
+  hubHero: { padding: "56px 0 48px", borderBottom: "1px solid #E8E4DE", marginBottom: 48, display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 40 },
+  hubHeroContent: { flex: 1 },
+  hubHeroGrid: { display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "flex-end" },
+  studioChip: { background: "#EFECE6", color: "#6B6560", fontSize: 11, padding: "4px 12px", borderRadius: 100, letterSpacing: "0.02em" },
+  eyebrow: { fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase", color: "#A09880", marginBottom: 10 },
+  hubTitle: { fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: 44, fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05, marginBottom: 12, color: "#1A1613" },
+  hubSub: { fontSize: 15, color: "#6B6560", lineHeight: 1.65, maxWidth: 540, fontWeight: 300 },
+  hubCards: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 56 },
+  hubCard: { background: "#fff", border: "1px solid #E8E4DE", borderRadius: 10, overflow: "hidden", cursor: "pointer", boxShadow: "0 1px 8px rgba(0,0,0,0.04)", position: "relative" },
+  hubCardAccent: { height: 3 },
+  hubCardIcon: { fontSize: 24, padding: "20px 20px 4px", color: "#C8B89A" },
+  hubCardTitle: { fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: 16, fontWeight: 600, padding: "0 20px 8px", letterSpacing: "-0.01em" },
+  hubCardDesc: { fontSize: 12, color: "#7A756F", padding: "0 20px 16px", lineHeight: 1.6 },
+  hubCardFooter: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 20px", borderTop: "1px solid #F0ECE6" },
+  hubCardCount: { fontSize: 11, color: "#A09880" },
+  hubCardArrow: { fontSize: 14, color: "#C8B89A" },
+  hubSection: { marginTop: 8 },
+  sectionHeader: { display: "flex", alignItems: "center", gap: 12, marginBottom: 16 },
+  sectionLine: { width: 24, height: 1, background: "#2A2520" },
+  sectionLabel: { fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "#2A2520", fontWeight: 500 },
+  newsItem: { display: "flex", alignItems: "center", gap: 16, padding: "14px 16px", borderRadius: 8, cursor: "pointer", background: "#FAFAF8", marginBottom: 6 },
+  newsTag: { fontSize: 10, padding: "3px 9px", borderRadius: 100, fontWeight: 500, letterSpacing: "0.04em", flexShrink: 0 },
+  newsTitle: { flex: 1, fontSize: 14, color: "#2A2520" },
+  newsMeta: { fontSize: 11, color: "#A09880", flexShrink: 0 },
+  // Site hero
+  siteHero: { padding: "48px 0 40px", borderBottom: "1px solid #E8E4DE", marginBottom: 40, position: "relative" },
+  siteHeroAccent: { width: 3, height: "calc(100% - 40px)", position: "absolute", left: -28, top: 0, borderRadius: "0 2px 2px 0" },
+  siteTitle: { fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: 40, fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05, marginBottom: 10, color: "#1A1613" },
+  siteSub: { fontSize: 14, color: "#6B6560", lineHeight: 1.65, maxWidth: 560, fontWeight: 300 },
+  // Doc library
+  docLayout: { display: "grid", gridTemplateColumns: "180px 1fr", gap: 48 },
+  docSidebar: {},
+  sidebarLabel: { fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: "#A09880", marginBottom: 12, fontWeight: 500 },
+  sidebarAll: { fontSize: 13, color: "#6B6560", padding: "7px 10px", borderRadius: 6, cursor: "pointer", display: "flex", justifyContent: "space-between", marginBottom: 4 },
+  sidebarAllActive: { background: "#EFECE6", color: "#2A2520", fontWeight: 500 },
+  sidebarCat: { display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "#6B6560", padding: "7px 10px", borderRadius: 6, cursor: "pointer", marginBottom: 2 },
+  sidebarCatActive: { background: "#EFECE6", color: "#2A2520" },
+  sidebarDot2: { width: 5, height: 5, borderRadius: "50%", flexShrink: 0 },
+  sidebarCount: { marginLeft: "auto", fontSize: 11, color: "#BBB5AC" },
+  docCatHeader: { display: "flex", alignItems: "center", gap: 10, marginBottom: 10 },
+  docCatLine: { width: 20, height: 1 },
+  docCatLabel: { fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 500, color: "#2A2520" },
+  docRow: { display: "flex", alignItems: "center", gap: 14, padding: "12px 14px", borderRadius: 8, background: "#FAFAF8", marginBottom: 4, cursor: "pointer" },
+  fileType: { fontSize: 9, fontWeight: 700, padding: "3px 6px", borderRadius: 3, letterSpacing: "0.04em", flexShrink: 0 },
+  docTitle: { fontSize: 14, color: "#2A2520", marginBottom: 2 },
+  docMeta: { fontSize: 11, color: "#A09880" },
+  docBtn: { background: "none", border: "1px solid #E0DCD6", borderRadius: 6, padding: "5px 12px", fontSize: 12, cursor: "pointer", color: "#6B6560", fontFamily: "inherit", flexShrink: 0 },
+  // Learning
+  tabs: { display: "flex", gap: 0, borderBottom: "1px solid #E8E4DE", marginBottom: 32 },
+  tab: { background: "none", border: "none", borderBottom: "2px solid transparent", cursor: "pointer", padding: "10px 20px", fontSize: 13, color: "#888", fontFamily: "inherit" },
+  tabActive: { color: "#2A2520", borderBottomColor: SITES.learning.color, fontWeight: 500 },
+  filterRow: { display: "flex", gap: 8, marginBottom: 28 },
+  pill: { background: "none", border: "1px solid #E0DCD6", borderRadius: 100, padding: "5px 14px", fontSize: 12, cursor: "pointer", color: "#888", fontFamily: "inherit" },
+  pillActive: { background: "#2A2520", borderColor: "#2A2520", color: "#fff" },
+  courseGrid: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 },
+  courseCard: { background: "#fff", border: "1px solid #E8E4DE", borderRadius: 10, overflow: "hidden", boxShadow: "0 1px 8px rgba(0,0,0,0.04)" },
+  courseVis: { height: 120, display: "flex", alignItems: "flex-start", justifyContent: "space-between", padding: 14 },
+  weekBadge: { fontSize: 10, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", background: "rgba(255,255,255,0.1)", padding: "3px 9px", borderRadius: 4 },
+  newBadge: { fontSize: 10, color: "#C8B89A", background: "rgba(200,184,154,0.15)", padding: "3px 9px", borderRadius: 4 },
+  courseBody: { padding: 18 },
+  courseMeta: { display: "flex", gap: 8, marginBottom: 8, alignItems: "center" },
+  levelBadge: { fontSize: 10, padding: "3px 8px", borderRadius: 4, fontWeight: 500 },
+  courseTag: { fontSize: 10, color: "#A09880", letterSpacing: "0.04em", textTransform: "uppercase" },
+  courseTitle: { fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: 16, fontWeight: 600, lineHeight: 1.3, marginBottom: 7, color: "#1A1613" },
+  courseDesc: { fontSize: 12, color: "#7A756F", lineHeight: 1.6, marginBottom: 16 },
+  courseFooter: { display: "flex", alignItems: "center", gap: 12, borderTop: "1px solid #F0ECE6", paddingTop: 12 },
+  courseStat: { fontSize: 11, color: "#A09880", flex: 1 },
+  startBtn: { background: "#F0ECE6", border: "none", borderRadius: 6, padding: "5px 12px", fontSize: 12, cursor: "pointer", color: "#2A2520", fontFamily: "inherit", fontWeight: 500 },
+  // Progress
+  progressCards: { display: "flex", gap: 1, background: "#E8E4DE", border: "1px solid #E8E4DE", borderRadius: 10, overflow: "hidden", marginBottom: 36 },
+  progressCard: { flex: 1, background: "#fff", padding: "24px 20px", textAlign: "center" },
+  progressNum: { fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: 32, fontWeight: 500, color: "#1A1613", marginBottom: 4 },
+  progressLbl: { fontSize: 11, color: "#A09880", textTransform: "uppercase", letterSpacing: "0.06em" },
+  barLabel: { display: "flex", justifyContent: "space-between", marginBottom: 6 },
+  barTrack: { height: 3, background: "#E8E4DE", borderRadius: 2, overflow: "hidden" },
+  barFill: { height: "100%", borderRadius: 2 },
+  footer: { borderTop: "1px solid #E8E4DE", marginTop: "auto" },
+  footerInner: { maxWidth: 1200, margin: "0 auto", padding: "18px 28px", display: "flex", justifyContent: "space-between", fontSize: 11, color: "#A09880" },
+};
+
+const SITES_const = SITES;
+
+const css = `
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .hub-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.09) !important; transition: all 0.2s; }
+  .course-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.09) !important; transition: all 0.2s; }
+  .doc-row:hover { background: #F0ECE6 !important; }
+  .news-item:hover { background: #F0ECE6 !important; }
+  .search-result:hover { background: #F8F6F2; }
+  .start-btn:hover { background: #2A2520 !important; color: #fff !important; }
+  .doc-btn:hover { background: #EFECE6 !important; }
+`;
+
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
+</script>
+</body>
+</html>
