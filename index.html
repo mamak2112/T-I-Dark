@@ -3,493 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KI Retningslinjer – Dark Design Group</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<title>Prototyper – Teknologi og Innovasjon – Dark Design Group</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --indigo: #9B8FF0;
-  --cyan: #7DD4F0;
-  --magenta: #E88FCE;
-  --coral: #F4A49A;
-  --green: #7EC9A0;
-  --amber: #E8C074;
-  --red: #D98888;
-  --black: #2A2A3C;
-  --dark: #3A3A52;
-  --grey: #5E5E72;
-  --mid: #8888A0;
-  --light: #9A9AAE;
-  --border: #E8E6F0;
-  --bg: #FAFAFB;
-  --pale: #F0EFFA;
-  --white: #FFFFFF;
-  --font: 'DM Sans', system-ui, sans-serif;
+  --indigo: #4A3D5A;
+  --cyan: #3D5A4A;
+  --magenta: #5A3D3D;
+  --coral: #C8B89A;
+  --black: #1A1613;
+  --dark: #2A2520;
+  --grey: #6B6560;
+  --mid: #A09880;
+  --light: #BBB5AC;
+  --border: #E8E4DE;
+  --bg: #F8F6F2;
+  --pale: #EFECE6;
+  --white: #FAFAF8;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: var(--font); background: var(--bg); color: var(--grey); line-height: 1.7; font-size: 14px; }
-.page { max-width: 900px; margin: 0 auto; padding: 60px 48px; }
-.cover { text-align: center; padding: 120px 48px 80px; border-bottom: 1px solid var(--border); margin-bottom: 60px; }
-.cover .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 3px; color: var(--indigo); margin-bottom: 16px; }
-.cover h1 { font-size: 42px; font-weight: 700; color: var(--black); letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 8px; }
-.cover .sub { font-size: 22px; color: var(--mid); font-weight: 300; margin-bottom: 48px; }
-.cover .firm { font-size: 18px; font-weight: 600; color: var(--black); margin-bottom: 8px; }
-.cover .studios { font-size: 13px; color: var(--mid); margin-bottom: 48px; }
-.cover .meta { font-size: 12px; color: var(--light); line-height: 2; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--grey); min-height: 100vh; display: flex; flex-direction: column; }
 
-h1.section { font-size: 28px; font-weight: 700; color: var(--black); letter-spacing: -0.3px; margin: 56px 0 20px; padding-top: 40px; border-top: 1px solid var(--border); }
-h1.section:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
-h2.sub { font-size: 20px; font-weight: 600; color: var(--dark); margin: 32px 0 14px; }
-h3.sub { font-size: 16px; font-weight: 600; color: var(--black); margin: 24px 0 10px; }
+.header { padding: 48px 48px 0; max-width: 960px; margin: 0 auto; width: 100%; }
+.logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 48px; }
+.logo-mark { background: var(--black); color: var(--bg); font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 6px 10px; border-radius: 4px; }
+.logo-text { font-size: 13px; color: var(--mid); letter-spacing: 0.5px; }
 
-p { margin-bottom: 14px; }
-p.bold-lead span.b { font-weight: 600; color: var(--black); }
+.hero { padding: 0 48px 56px; max-width: 960px; margin: 0 auto; width: 100%; border-bottom: 1px solid var(--border); }
+.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 3px; color: var(--indigo); margin-bottom: 14px; }
+.hero h1 { font-size: 38px; font-weight: 700; color: var(--black); letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 12px; }
+.hero p { font-size: 15px; color: var(--mid); line-height: 1.7; max-width: 560px; }
 
-.callout { background: var(--pale); border-left: 4px solid var(--indigo); padding: 16px 20px; margin: 18px 0; border-radius: 0 8px 8px 0; font-style: italic; color: var(--dark); font-size: 13px; line-height: 1.7; }
-.callout.warn { border-left-color: var(--coral); background: #FFF5F3; }
-.callout.policy { border-left-color: var(--indigo); background: var(--pale); font-style: normal; }
+.grid { padding: 48px; max-width: 960px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; flex: 1; }
 
-.policy-box { background: var(--white); border: 2px solid var(--indigo); border-radius: 12px; padding: 28px 24px; margin: 24px 0; }
-.policy-box .policy-title { font-size: 14px; font-weight: 700; color: var(--indigo); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
-.policy-box p, .policy-box li { font-size: 13px; }
-.policy-box ul { padding-left: 20px; margin: 8px 0; }
-.policy-box li { margin-bottom: 6px; }
+.card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 0; overflow: hidden; text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
 
-.forbidden-box { background: #FFF5F3; border: 2px solid var(--coral); border-radius: 12px; padding: 28px 24px; margin: 24px 0; }
-.forbidden-box .fb-title { font-size: 14px; font-weight: 700; color: var(--coral); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
-.forbidden-box li { font-size: 13px; margin-bottom: 6px; }
-.forbidden-box ul { padding-left: 20px; margin: 8px 0; }
+.card-accent { height: 4px; }
+.card-body { padding: 24px 22px; flex: 1; display: flex; flex-direction: column; }
+.card-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; margin-bottom: 10px; }
+.card-title { font-size: 18px; font-weight: 700; color: var(--black); margin-bottom: 8px; line-height: 1.3; }
+.card-desc { font-size: 13px; color: var(--grey); line-height: 1.65; flex: 1; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; padding: 14px 22px; border-top: 1px solid var(--border); }
+.card-status { font-size: 11px; color: var(--mid); }
+.card-arrow { font-size: 14px; color: var(--mid); }
 
-/* Tables */
-table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 13px; }
-table th { text-transform: uppercase; font-size: 10px; letter-spacing: 1px; font-weight: 600; color: var(--white); padding: 12px 14px; text-align: left; }
-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--grey); }
-table td:first-child { font-weight: 600; color: var(--black); }
-table tr:nth-child(even) td { background: var(--bg); }
+.card-empty { background: var(--bg); border: 2px dashed var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; min-height: 200px; }
+.card-empty-inner { text-align: center; padding: 24px; }
+.card-empty-icon { font-size: 28px; color: var(--border); margin-bottom: 10px; }
+.card-empty-text { font-size: 13px; color: var(--light); }
 
-.th-indigo th { background: var(--indigo); }
-.th-cyan th { background: var(--cyan); }
-.th-magenta th { background: var(--magenta); }
-.th-coral th { background: var(--coral); }
-
-/* Data classification cards */
-.cards-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 28px 0; }
-.dc-card { border-radius: 16px; padding: 22px 18px; position: relative; }
-.dc-card .level { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; margin-bottom: 14px; }
-.dc-card .title { font-size: 18px; font-weight: 700; color: var(--black); margin-bottom: 6px; }
-.dc-card .divider { width: 32px; height: 2px; margin-bottom: 12px; }
-.dc-card .desc { font-size: 11px; color: var(--grey); margin-bottom: 16px; line-height: 1.6; }
-.dc-card .examples-label { font-size: 9px; font-weight: 600; letter-spacing: 1px; color: var(--mid); margin-bottom: 6px; }
-.dc-card .example { font-size: 11px; color: var(--grey); margin-bottom: 3px; }
-.dc-card .usage { margin-top: 16px; padding: 10px 12px; border-radius: 8px; }
-.dc-card .usage .usage-label { font-size: 9px; font-weight: 600; letter-spacing: 1px; }
-.dc-card .usage .usage-text { font-size: 12px; font-weight: 600; color: var(--black); }
-
-.card-green { background: rgba(74,157,107,0.08); border: 1px solid rgba(74,157,107,0.25); }
-.card-green .level { color: var(--green); }
-.card-green .divider { background: var(--green); }
-.card-green .usage { background: rgba(74,157,107,0.08); }
-.card-green .usage-label { color: var(--green); }
-
-.card-amber { background: rgba(212,146,42,0.08); border: 1px solid rgba(212,146,42,0.25); }
-.card-amber .level { color: var(--amber); }
-.card-amber .divider { background: var(--amber); }
-.card-amber .usage { background: rgba(212,146,42,0.08); }
-.card-amber .usage-label { color: var(--amber); }
-
-.card-indigo { background: rgba(107,92,231,0.08); border: 1px solid rgba(107,92,231,0.25); }
-.card-indigo .level { color: var(--indigo); }
-.card-indigo .divider { background: var(--indigo); }
-.card-indigo .usage { background: rgba(107,92,231,0.08); }
-.card-indigo .usage-label { color: var(--indigo); }
-
-.card-red { background: rgba(192,69,69,0.08); border: 1px solid rgba(192,69,69,0.25); }
-.card-red .level { color: var(--red); }
-.card-red .divider { background: var(--red); }
-.card-red .usage { background: rgba(192,69,69,0.08); }
-.card-red .usage-label { color: var(--red); }
-
-ul.bullets { padding-left: 20px; margin: 8px 0 16px; }
-ul.bullets li { margin-bottom: 6px; }
-ol.steps { padding-left: 20px; margin: 8px 0 16px; }
-ol.steps li { margin-bottom: 8px; }
-
-.quick-ref { text-align: center; background: var(--pale); padding: 20px; border-radius: 10px; margin: 24px 0; font-weight: 600; color: var(--black); font-size: 15px; }
-
-.footer { text-align: center; border-top: 1px solid var(--border); padding-top: 32px; margin-top: 56px; }
-.footer p { font-size: 12px; color: var(--light); font-style: italic; }
-.footer .brand { color: var(--indigo); font-style: normal; font-weight: 500; margin-top: 8px; }
-
-.contact-names { display: inline; font-weight: 600; color: var(--indigo); }
+.footer { border-top: 1px solid var(--border); padding: 24px 48px; text-align: center; margin-top: auto; }
+.footer p { font-size: 11px; color: var(--light); }
+.footer .brand { color: var(--indigo); font-weight: 500; }
 </style>
 </head>
 <body>
-<div class="page">
 
-<!-- COVER -->
-<div class="cover">
-  <div class="eyebrow">RETNINGSLINJER</div>
-  <h1>Personvern og databeskyttelse</h1>
-  <div class="sub">ved bruk av kunstig intelligens</div>
-  <div class="firm">Dark Design Group</div>
-  <div class="studios">Dark Arkitekter · Lark Landskap · Zinc Interior · HK Arkitekter</div>
-  <div class="meta">Versjon 1.0 · [Dato]<br>Utarbeidet av: [Ditt navn]<br>Leder for innovasjon og teknologi</div>
-</div>
-
-<!-- 1. FORMÅL -->
-<h1 class="section">1. Formål</h1>
-<p>Disse retningslinjene fastsetter klare regler for hvordan Dark Design Group og våre studioer benytter verktøy basert på kunstig intelligens (KI) i det daglige arbeidet. Formålet er å beskytte våre klienters konfidensielle informasjon, ivareta vår immaterielle eiendom, sikre etterlevelse av norsk og europeisk personvernregelverk, og legge til rette for at alle medarbeidere kan bruke KI på en trygg og ansvarlig måte.</p>
-<p>KI er et kraftfullt verktøy for vår praksis. Disse retningslinjene handler ikke om å begrense bruken, men om å bruke KI med god dømmekraft.</p>
-<p class="bold-lead"><span class="b">Disse retningslinjene gjelder for alle ansatte i samtlige studioer i Dark Design Group:</span></p>
-<table class="th-indigo"><tr><th>Studio</th><th>Fagområde</th></tr>
-<tr><td>Dark Arkitekter</td><td>Arkitektur</td></tr>
-<tr><td>Lark Landskap</td><td>Landskapsarkitektur</td></tr>
-<tr><td>Zinc Interior</td><td>Interiørarkitektur</td></tr>
-<tr><td>HK Arkitekter</td><td>Arkitektur</td></tr>
-</table>
-
-<!-- 2. OMFANG -->
-<h1 class="section">2. Omfang</h1>
-<p>Disse retningslinjene omfatter alle KI-baserte verktøy som benyttes i vårt arbeid. Dette inkluderer både dedikerte KI-verktøy og tradisjonelle designverktøy som har fått innebygde KI-funksjoner.</p>
-
-<h2 class="sub">Samtale-KI og språkmodeller</h2>
-<table class="th-indigo"><tr><th>Verktøy</th><th>Vanlig bruk</th></tr>
-<tr><td>ChatGPT (OpenAI)</td><td>Skrivestøtte, research, idéutvikling, kodegenerering</td></tr>
-<tr><td>Claude (Anthropic)</td><td>Skrivestøtte, research, dokumentanalyse, kodegenerering</td></tr>
-<tr><td>Gemini (Google)</td><td>Skrivestøtte, research, integrasjon med Google Workspace</td></tr>
-<tr><td>Microsoft Copilot</td><td>Skrivestøtte, oppsummering, integrasjon med Microsoft 365</td></tr>
-</table>
-
-<h2 class="sub">KI-bildegenerering</h2>
-<table class="th-cyan"><tr><th>Verktøy</th><th>Vanlig bruk</th></tr>
-<tr><td>Midjourney</td><td>Konseptbilder, stemningsbilder, tidlig visuell utforskning</td></tr>
-<tr><td>DALL·E (OpenAI)</td><td>Konseptbilder, raske visuelle studier</td></tr>
-<tr><td>Stable Diffusion</td><td>Konseptbilder (kan kjøres lokalt for bedre datakontroll)</td></tr>
-<tr><td>Adobe Firefly</td><td>Konseptbilder, teksturgenerering, integrert i Adobe-produkter</td></tr>
-<tr><td>Nano Banana</td><td>Konseptbilder, raske visuelle studier</td></tr>
-<tr><td>Krea.ai</td><td>Sanntids KI-bildegenerering, stilutforskning</td></tr>
-<tr><td>X-Figura</td><td>Arkitekturspesifikk KI-bildegenerering</td></tr>
-</table>
-
-<h2 class="sub">Visualiserings- og rendringsverktøy</h2>
-<table class="th-magenta"><tr><th>Verktøy</th><th>KI-funksjoner</th></tr>
-<tr><td>Enscape (Chaos)</td><td>KI-basert støyreduksjon, skybaserte rendringsfunksjoner</td></tr>
-<tr><td>Veras (Chaos)</td><td>KI-generert rendring fra 3D-visninger</td></tr>
-<tr><td>V-Ray (Chaos)</td><td>KI-støyreduksjon, skybasert rendring</td></tr>
-<tr><td>D5 Render</td><td>KI-assistert rendring, skybaserte ressursbiblioteker</td></tr>
-<tr><td>Twinmotion (Epic Games)</td><td>KI-funksjoner, kjøres som plugin i Revit, skysynkronisering</td></tr>
-</table>
-
-<h2 class="sub">BIM- og designverktøy</h2>
-<table class="th-coral"><tr><th>Verktøy</th><th>KI-funksjoner</th></tr>
-<tr><td>Revit (Autodesk)</td><td>Generativ design, Forma-integrasjon, skybaserte KI-analyser</td></tr>
-<tr><td>Autodesk Forma</td><td>KI-drevet miljøanalyse, generativ volumstudie</td></tr>
-<tr><td>SketchUp (Trimble)</td><td>KI-assistert modellering, Diffusion plugin-integrasjoner</td></tr>
-<tr><td>Rhino / Grasshopper</td><td>KI-plugins og -komponenter, maskinlæringsintegrasjoner</td></tr>
-<tr><td>Hypar</td><td>Skybasert generativ design</td></tr>
-</table>
-
-<h2 class="sub">Kodeassistenter</h2>
-<table class="th-indigo"><tr><th>Verktøy</th><th>Vanlig bruk</th></tr>
-<tr><td>GitHub Copilot</td><td>Kodegenerering, scripting for Dynamo/Grasshopper/Python</td></tr>
-<tr><td>Cursor</td><td>KI-assistert kodeditering, skriptutvikling</td></tr>
-<tr><td>Claude Code</td><td>KI-kodeassistent for kommandolinje</td></tr>
-</table>
-
-<h2 class="sub">Samhandlings- og kommunikasjonsverktøy</h2>
-<table class="th-cyan"><tr><th>Verktøy</th><th>KI-funksjoner</th></tr>
-<tr><td>Miro</td><td>KI-assistert idéutvikling, innholdsgenerering, oppsummering</td></tr>
-<tr><td>Figma</td><td>KI-assisterte designfunksjoner, innholdsgenerering, prototyping</td></tr>
-<tr><td>Canva</td><td>Magic Write, Magic Design, KI-bildegenerering, bakgrunnsfjerning</td></tr>
-</table>
-
-<h2 class="sub">Adobe-verktøy</h2>
-<table class="th-magenta"><tr><th>Verktøy</th><th>KI-funksjoner</th></tr>
-<tr><td>Adobe Photoshop</td><td>Generative Fill, Generative Expand, nevrale filtre (Firefly)</td></tr>
-<tr><td>Adobe Acrobat</td><td>AI Assistant for dokumentoppsummering og spørsmål/svar</td></tr>
-<tr><td>Adobe Express</td><td>KI-baserte maler, tekstgenerering, bildegenerering</td></tr>
-</table>
-
-<div class="callout">Hvorfor dette er viktig: Når du bruker Generative Fill i Photoshop, sendes dataene dine til Adobes skyservere for behandling. Når Microsoft Copilot oppsummerer et møte i Teams, behandles møteprotokollen av KI. Behandle enhver KI-funksjon med samme aktsomhet som du ville gjort med et frittstående KI-verktøy.</div>
-
-<!-- 3. JURIDISK RAMMEVERK -->
-<h1 class="section">3. Juridisk og regulatorisk rammeverk</h1>
-<p>Dark Design Group er etablert i Norge og er underlagt følgende personvernregelverk. Alle medarbeidere skal forstå at dette er juridiske forpliktelser, ikke valgfrie anbefalinger.</p>
-<p class="bold-lead"><span class="b">Personvernforordningen (GDPR):</span> Som EØS-medlem anvender Norge GDPR i sin helhet gjennom personopplysningsloven. Når du legger personopplysninger inn i et KI-verktøy, igangsetter du en behandling av personopplysninger etter GDPR.</p>
-<p class="bold-lead"><span class="b">Datatilsynet:</span> Datatilsynet er tilsynsmyndigheten med ansvar for å håndheve personvernregelverket i Norge. Brudd kan medføre betydelige overtredelsesgebyr og omdømmetap.</p>
-
-<table class="th-indigo"><tr><th>Prinsipp</th><th>Hva det betyr for KI-bruk</th></tr>
-<tr><td>Lovlighet</td><td>Du må ha et behandlingsgrunnlag. Bekvemmelighet er ikke et behandlingsgrunnlag.</td></tr>
-<tr><td>Formålsbegrensning</td><td>Opplysninger samlet inn til ett formål kan ikke gjenbrukes i et KI-verktøy til et urelatert formål.</td></tr>
-<tr><td>Dataminimering</td><td>Legg kun inn det som er nødvendig. Kan KI-en hjelpe deg uten klientens navn, skal navnet ikke inkluderes.</td></tr>
-<tr><td>Lagringsbegrensning</td><td>KI-verktøy kan lagre samtaler på ubestemt tid med mindre du aktivt sletter dem.</td></tr>
-<tr><td>Integritet og konfidensialitet</td><td>Du er ansvarlig for at opplysninger i KI-verktøy er beskyttet mot uautorisert tilgang.</td></tr>
-<tr><td>Ansvarlighet</td><td>Dark Design Group må kunne dokumentere etterlevelse.</td></tr>
-</table>
-
-<p class="bold-lead"><span class="b">Plan- og bygningsregelverket (SAK10 / TEK17):</span> Ansvarlig prosjekterende har personlig ansvar uavhengig av om KI har bidratt i arbeidet. KI-genererte resultater som påvirker sikkerhet eller forskriftsmessighet skal gjennom ordinære kontrollprosesser.</p>
-
-<!-- 4. DATAKLASSIFISERING -->
-<h1 class="section">4. Dataklassifisering</h1>
-<p>Før du tar i bruk et KI-verktøy må du forstå hvilken type data du arbeider med. Dark Design Group klassifiserer data i fire nivåer:</p>
-
-<div class="cards-row">
-  <div class="dc-card card-green">
-    <div class="level">NIVÅ 01</div>
-    <div class="title">Offentlig</div>
-    <div class="divider"></div>
-    <div class="desc">Data som allerede er offentlig tilgjengelig eller skal offentliggjøres.</div>
-    <div class="examples-label">EKSEMPLER</div>
-    <div class="example">· Publiserte prosjektbilder</div>
-    <div class="example">· Byggeforskrifter</div>
-    <div class="example">· Markedsmateriell</div>
-    <div class="usage"><div class="usage-label">KI-BRUK</div><div class="usage-text">Uten begrensninger</div></div>
-  </div>
-  <div class="dc-card card-amber">
-    <div class="level">NIVÅ 02</div>
-    <div class="title">Internt</div>
-    <div class="divider"></div>
-    <div class="desc">Kun for intern bruk, men ikke vesentlig skadelig ved utlevering.</div>
-    <div class="examples-label">EKSEMPLER</div>
-    <div class="example">· Interne prosessdokumenter</div>
-    <div class="example">· Generelle researchnotater</div>
-    <div class="example">· Opplæringsmateriell</div>
-    <div class="usage"><div class="usage-label">KI-BRUK</div><div class="usage-text">Tillatt med varsomhet</div></div>
-  </div>
-  <div class="dc-card card-indigo">
-    <div class="level">NIVÅ 03</div>
-    <div class="title">Konfidensielt</div>
-    <div class="divider"></div>
-    <div class="desc">Klient-, prosjekt- eller forretningsdata som vil skade ved utlevering.</div>
-    <div class="examples-label">EKSEMPLER</div>
-    <div class="example">· Prosjektgrunnlag &amp; tegninger</div>
-    <div class="example">· Klientnavn &amp; kontrakter</div>
-    <div class="example">· Honorartilbud &amp; strategi</div>
-    <div class="usage"><div class="usage-label">KI-BRUK</div><div class="usage-text">Begrenset · kun bedrift</div></div>
-  </div>
-  <div class="dc-card card-red">
-    <div class="level">NIVÅ 04</div>
-    <div class="title">Særlig sensitivt</div>
-    <div class="divider"></div>
-    <div class="desc">Data underlagt rettslige, sikkerhetsmessige eller regulatoriske forpliktelser.</div>
-    <div class="examples-label">EKSEMPLER</div>
-    <div class="example">· Sikkerhetsgradert info</div>
-    <div class="example">· PII &amp; helseopplysninger</div>
-    <div class="example">· NDA-data &amp; militære prosjekt</div>
-    <div class="usage"><div class="usage-label">KI-BRUK</div><div class="usage-text">Forbudt</div></div>
+<div class="header">
+  <div class="logo-row">
+    <div class="logo-mark">DDG</div>
+    <span class="logo-text">Dark Design Group</span>
   </div>
 </div>
 
-<!-- 5. HOVEDREGEL – NEW LEADERSHIP POLICY -->
-<h1 class="section">5. Hovedregel: Godkjent KI-verktøy</h1>
-
-<div class="policy-box">
-  <div class="policy-title">Microsoft Copilot Studio er Dark Design Groups godkjente primære KI-verktøy</div>
-  <p>All daglig KI-bruk i prosjektarbeid skal som hovedregel skje gjennom Microsoft Copilot Studio. Dette gir oss bedriftsavtale, datakontroll innenfor vårt M365-miljø og et felles verktøy på tvers av alle studioer.</p>
+<div class="hero">
+  <div class="eyebrow">TEKNOLOGI OG INNOVASJON</div>
+  <h1>Prototyper</h1>
+  <p>Interaktive prototyper og dokumenter under utvikling. Hver prototype er et selvstendig arbeidsdokument som kan deles, testes og bygges videre på.</p>
 </div>
 
-<h2 class="sub">Bruk av andre KI-verktøy</h2>
-<p>Dersom du har behov for å bruke et annet KI-verktøy enn Copilot Studio, gjelder følgende:</p>
+<div class="grid">
 
-<p class="bold-lead"><span class="b">Gratisversjoner av KI-verktøy</span> er tillatt for arbeid som utelukkende involverer Nivå 1- eller Nivå 2-data (offentlig eller internt, ikke-prosjektspesifikt materiale). For alt annet er gratisversjoner ikke tillatt.</p>
+  <a class="card" href="./ki-retningslinjer/">
+    <div class="card-accent" style="background: var(--indigo);"></div>
+    <div class="card-body">
+      <div class="card-label" style="color: var(--indigo);">AI X DARK</div>
+      <div class="card-title">KI-retningslinjer</div>
+      <div class="card-desc">Retningslinjer for personvern og databeskyttelse ved bruk av kunstig intelligens. Dataklassifisering, godkjente verktøy og praktiske arbeidsflyter.</div>
+    </div>
+    <div class="card-footer">
+      <span class="card-status">v1.0 · Under utvikling</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
 
-<p class="bold-lead"><span class="b">Betalte personlige versjoner</span> (f.eks. egen ChatGPT Plus, Claude Pro, Midjourney Pro) kan benyttes forutsatt at du:</p>
-<ul class="bullets">
-  <li>Har en personlig betalt lisens</li>
-  <li><strong>Aktivt deaktiverer datadeling og modelltrening</strong> i kontoinnstillingene før verktøyet tas i bruk med jobbinnhold (de fleste verktøy har dette under <em>Settings → Data Controls → «Improve the model for everyone»</em> eller tilsvarende)</li>
-  <li>Kun bruker verktøyet med Nivå 1- eller Nivå 2-data</li>
-  <li>Forstår at <strong>du personlig står ansvarlig</strong> for ethvert databrudd som oppstår ved bruk av ikke-godkjent verktøy</li>
-</ul>
+  <a class="card" href="./intranet-prototype/">
+    <div class="card-accent" style="background: var(--cyan);"></div>
+    <div class="card-body">
+      <div class="card-label" style="color: var(--cyan);">HUB</div>
+      <div class="card-title">SharePoint Hub</div>
+      <div class="card-desc">Interaktiv prototype for Teknologi og Innovasjon-hubben. Hub-og-spoke-arkitektur med BIM, AI, IT og Learning Platform.</div>
+    </div>
+    <div class="card-footer">
+      <span class="card-status">Konseptfase</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
 
-<p class="bold-lead"><span class="b">Forhåndsgodkjenning kreves.</span> Før du tar i bruk et nytt KI-verktøy i jobbsammenheng, kontakt en av følgende i KI-gruppen:</p>
-<p style="margin-left:20px;"><span class="contact-names">Alexander</span> · <span class="contact-names">Marco</span> · <span class="contact-names">Maria</span></p>
+  <div class="card-empty">
+    <div class="card-empty-inner">
+      <div class="card-empty-icon">+</div>
+      <div class="card-empty-text">Neste prototype</div>
+    </div>
+  </div>
 
-<div class="forbidden-box">
-  <div class="fb-title">Absolutt forbudt – uansett verktøy, uansett lisens</div>
-  <p>Det er <strong>strengt forbudt</strong> å legge inn følgende i noe KI-verktøy som ikke er Copilot Studio:</p>
-  <ul>
-    <li>Direkte klientinformasjon (navn, kontaktdetaljer, adresser)</li>
-    <li><strong>Tilbud, anbud og prisinformasjon</strong></li>
-    <li>Kontrakter og honorarberegninger</li>
-    <li>Konfidensiell prosjektinformasjon (tegninger, kravspesifikasjoner, modellfiler)</li>
-    <li>Interne strategi- og bemanningsdokumenter</li>
-  </ul>
-  <p style="margin-top:12px;">Brudd på denne regelen behandles som et alvorlig avvik og rapporteres umiddelbart i henhold til kapittel 10.</p>
 </div>
-
-<!-- 6. GYLNE REGLER -->
-<h1 class="section">6. Gylne regler</h1>
-<p>Dette er ufravikelige prinsipper for alle ansatte i samtlige studioer.</p>
-
-<h2 class="sub">6.1 Legg aldri inn klientnavn eller prosjektnavn i offentlige KI-verktøy</h2>
-<p><em>I stedet for:</em> «Skriv en designbeskrivelse for SKANSKA-prosjektet for Klient X»<br>
-<em>Bruk:</em> «Skriv en designbeskrivelse for et 40-etasjes kombinasjonsbygg i et varmt og tørt klima»</p>
-
-<h2 class="sub">6.2 Last aldri opp konfidensielle tegninger, modeller eller dokumenter</h2>
-<p>Dette inkluderer skjermbilder av tegninger, PDF-eksporter av kravspesifikasjoner og Revit-/Rhino-modellfiler.</p>
-
-<h2 class="sub">6.3 Stol aldri på KI-output som ferdig resultat</h2>
-<p>KI kan hallusinere, produsere skjeve resultater eller bryte opphavsrett. Alt KI-generert innhold skal kvalitetssikres av en kvalifisert medarbeider.</p>
-
-<h2 class="sub">6.4 Bruk aldri KI-genererte bilder i klientleveranser uten tydelig merking</h2>
-<p>KI-genererte bilder skal merkes som «KI-generert konseptbilde» eller tilsvarende.</p>
-
-<h2 class="sub">6.5 Sjekk alltid verktøyets retningslinjer for databehandling</h2>
-<p>Bruker verktøyet dine inndata til å trene sine modeller? Hvis ja, og du arbeider med data på Nivå 2 eller høyere, skal det ikke brukes. Er du i tvil, kontakt KI-gruppen.</p>
-
-<h2 class="sub">6.6 Bruk aldri KI til endelige tekniske beregninger eller livssikkerhetsbeslutninger</h2>
-<p>Alle resultater som påvirker bygningens ytelse, bæresystemer, brannsikkerhet eller forskriftsmessig etterlevelse skal gjennom ordinære profesjonelle kontrollprosesser.</p>
-
-<!-- 7. GODKJENTE VERKTØY -->
-<h1 class="section">7. Godkjente verktøy og deres datahåndtering</h1>
-<p>Nedenfor følger en oversikt over hvordan våre verktøy håndterer data. Tabellen oppdateres kvartalsvis.</p>
-
-<h2 class="sub">Samtale-KI og språkmodeller</h2>
-<table class="th-indigo"><tr><th>Verktøy</th><th>Lisens</th><th>Trener på data?</th><th>Lagring</th><th>Maks nivå</th></tr>
-<tr><td>ChatGPT (Free/Plus)</td><td>Personlig</td><td>Ja (uten opt-out)</td><td>OpenAI-servere</td><td>Kun Nivå 1</td></tr>
-<tr><td>ChatGPT (Team/Ent.)</td><td>Bedrift</td><td>Nei</td><td>Kryptert</td><td>Nivå 3 (anonym.)</td></tr>
-<tr><td>Claude (Free)</td><td>Personlig</td><td>Kan benyttes</td><td>Anthropic-servere</td><td>Kun Nivå 1</td></tr>
-<tr><td>Claude (Pro/Team)</td><td>Bedrift</td><td>Nei</td><td>Kryptert</td><td>Nivå 3 (anonym.)</td></tr>
-<tr><td>Gemini (Free)</td><td>Personlig</td><td>Ja (uten opt-out)</td><td>Google-servere</td><td>Kun Nivå 1</td></tr>
-<tr><td>Gemini (Enterprise)</td><td>Bedrift</td><td>Nei</td><td>Google Cloud</td><td>Nivå 3 (anonym.)</td></tr>
-<tr><td>Copilot (Free/Bing)</td><td>Personlig</td><td>Kan benyttes</td><td>Microsoft-servere</td><td>Kun Nivå 1</td></tr>
-<tr><td>Copilot (365 Ent.)</td><td>Bedrift</td><td>Nei</td><td>M365-tenant</td><td>Nivå 3 (verifiser)</td></tr>
-</table>
-
-<h2 class="sub">KI-bildegenerering</h2>
-<table class="th-cyan"><tr><th>Verktøy</th><th>Lisens</th><th>Trener på data?</th><th>Lagring</th><th>Maks nivå</th></tr>
-<tr><td>Midjourney (Basic)</td><td>Personlig</td><td>Ja, offentlig</td><td>Sky, offentlig galleri</td><td>Kun Nivå 1</td></tr>
-<tr><td>Midjourney (Pro)</td><td>Bedrift</td><td>Privat m/ Stealth</td><td>Sky, privat</td><td>Nivå 2 (verifiser)</td></tr>
-<tr><td>Adobe Firefly</td><td>Per Adobe-nivå</td><td>Nei (kundedata)</td><td>Adobe Cloud</td><td>Nivå 2 (verifiser)</td></tr>
-<tr><td>Stable Diffusion</td><td>Egen drift</td><td>Nei (lokalt)</td><td>Kun lokal maskin</td><td>Nivå 3 (lokalt)</td></tr>
-</table>
-
-<h2 class="sub">Visualisering og rendring</h2>
-<table class="th-magenta"><tr><th>Verktøy</th><th>Lisens</th><th>KI-data til sky?</th><th>Lagring</th><th>Maks nivå</th></tr>
-<tr><td>Enscape</td><td>Bedrift</td><td>Støyred. lokal</td><td>Hovedsakelig lokalt</td><td>Nivå 3 (verifiser)</td></tr>
-<tr><td>Veras</td><td>Bedrift</td><td>Ja, viewport</td><td>Skybehandlet</td><td>Nivå 2 (anonymiser)</td></tr>
-<tr><td>V-Ray</td><td>Bedrift</td><td>Lokal + sky</td><td>Avhengig av funksjon</td><td>N3 lokalt, N2 sky</td></tr>
-<tr><td>D5 Render</td><td>Bedrift</td><td>Verifiser</td><td>Sky + lokalt</td><td>BEKREFT</td></tr>
-<tr><td>Twinmotion</td><td>Bedrift</td><td>Verifiser</td><td>Skysync tilgj.</td><td>BEKREFT</td></tr>
-</table>
-
-<h2 class="sub">BIM- og designverktøy</h2>
-<table class="th-coral"><tr><th>Verktøy</th><th>Lisens</th><th>KI-data til sky?</th><th>Lagring</th><th>Maks nivå</th></tr>
-<tr><td>Revit</td><td>Bedrift</td><td>Ja (sky-KI)</td><td>Autodesk Cloud</td><td>Nivå 3 (per avtale)</td></tr>
-<tr><td>Autodesk Forma</td><td>Bedrift</td><td>Ja</td><td>Autodesk Cloud</td><td>Nivå 3 (per avtale)</td></tr>
-<tr><td>SketchUp</td><td>Bedrift</td><td>Verifiser plugins</td><td>Trimble + plugins</td><td>BEKREFT per plugin</td></tr>
-<tr><td>Rhino / Grasshopper</td><td>Bedrift</td><td>Lokalt; plugins varierer</td><td>Lokalt + plugin</td><td>BEKREFT per plugin</td></tr>
-<tr><td>Hypar</td><td>Bedrift</td><td>Ja (sky)</td><td>Skybehandlet</td><td>Nivå 2 (verifiser)</td></tr>
-</table>
-
-<!-- 8. SLIK VURDERER DU -->
-<h1 class="section">8. Slik vurderer du et KI-verktøys personvern</h1>
-
-<h2 class="sub">8.1 Hvor du finner retningslinjene</h2>
-<table class="th-indigo"><tr><th>Dokument</th><th>Hva det dekker</th><th>Hvor du finner det</th></tr>
-<tr><td>Personvernerklæring</td><td>Innsamling, lagring og deling</td><td>Bunnen av nettsiden, «Legal»</td></tr>
-<tr><td>Brukervilkår</td><td>Rettigheter og samtykke</td><td>Bunnen av nettsiden, registrering</td></tr>
-<tr><td>Databehandleravtale</td><td>GDPR-forpliktelser</td><td>«Security» eller «Trust»</td></tr>
-<tr><td>FAQ / Trust Center</td><td>Lettlest oppsummering</td><td>«Security», «Trust», «Enterprise»</td></tr>
-<tr><td>Innstillinger i appen</td><td>Opt-out og datadeling</td><td>Settings → Personvern</td></tr>
-</table>
-
-<h2 class="sub">8.2 De fem spørsmålene</h2>
-<p>Besvar disse før du bruker et verktøy med firmadata over Nivå 1:</p>
-<ol class="steps">
-  <li><strong>Trener verktøyet på mine inndata?</strong> Se etter «improve our services» eller «training data».</li>
-  <li><strong>Hvor lagres dataene, og hvor lenge?</strong> Se etter «data retention» og «data residency».</li>
-  <li><strong>Hvem har tilgang?</strong> Se etter «third-party sharing» og «sub-processors».</li>
-  <li><strong>Kan jeg slette dataene?</strong> Se etter «data deletion» og «right to erasure».</li>
-  <li><strong>Hva skiller gratis fra betalt?</strong> Sammenlign vilkår for ulike lisensnivåer.</li>
-</ol>
-
-<h2 class="sub">8.3 Ettminuttssjekken</h2>
-<ol class="steps">
-  <li>Søk etter «Privacy» eller «Trust» på nettsiden. Finnes ingen, stopp.</li>
-  <li>Ctrl+F «train» på personvernsiden. Les alt som inneholder det.</li>
-  <li>Søk etter «retain» eller «retention».</li>
-  <li>Søk etter «third party» eller «share».</li>
-  <li>Sjekk kontoinnstillinger for datadeling. Slå av.</li>
-</ol>
-
-<!-- 9. PRAKTISKE ARBEIDSFLYTER -->
-<h1 class="section">9. Praktiske arbeidsflyter</h1>
-
-<h2 class="sub">9.1 Samtale-KI i prosjektarbeid</h2>
-<p class="bold-lead"><span class="b">Steg 1:</span> Avgjør datanivået (se kap. 4).</p>
-<p class="bold-lead"><span class="b">Steg 2:</span> Fjern identifiserende informasjon ved Nivå 2/3.</p>
-<p class="bold-lead"><span class="b">Steg 3:</span> Bruk Copilot Studio eller bedriftslisensiert versjon.</p>
-<p class="bold-lead"><span class="b">Steg 4:</span> Vurder resultatet kritisk. Ikke kopier direkte til leveranser.</p>
-<p class="bold-lead"><span class="b">Steg 5:</span> Slett samtalehistorikk med prosjektsensitivt innhold.</p>
-
-<h2 class="sub">9.2 Bildegenereringsverktøy</h2>
-<p class="bold-lead"><span class="b">Steg 1:</span> Bruk aldri klientlogoer eller opphavsrettsbeskyttede tegninger som referanser i gratisversjoner.</p>
-<p class="bold-lead"><span class="b">Steg 2:</span> Bilder generert med gratisplaner kan være offentlig synlige.</p>
-<p class="bold-lead"><span class="b">Steg 3:</span> Merk alle KI-genererte bilder tydelig.</p>
-
-<h2 class="sub">9.3 Kodeassistenter</h2>
-<p class="bold-lead"><span class="b">Steg 1:</span> Lim aldri inn klientdata, API-nøkler eller passord.</p>
-<p class="bold-lead"><span class="b">Steg 2:</span> Unngå prosjektspesifikke filstier i kodekommentarer.</p>
-<p class="bold-lead"><span class="b">Steg 3:</span> Gjennomgå all KI-generert kode før produksjon.</p>
-
-<!-- 10. ROLLER OG ANSVAR -->
-<h1 class="section">10. Roller og ansvar</h1>
-<table class="th-indigo"><tr><th>Rolle</th><th>Ansvar</th></tr>
-<tr><td>Alle ansatte</td><td>Følger retningslinjene. Stiller spørsmål ved tvil. Melder avvik umiddelbart.</td></tr>
-<tr><td>Prosjektledere</td><td>Sikrer at teamet følger retningslinjene. Vurderer dataklassifisering. Godkjenner KI-bruk.</td></tr>
-<tr><td>KI-gruppen (Alexander, Marco, Maria)</td><td>Godkjenner nye KI-verktøy. Gir veiledning og opplæring. Gjennomfører kvartalsvise revisjoner.</td></tr>
-<tr><td>IT-avdelingen</td><td>Forvalter bedriftslisenser. Overvåker tilgang. Støtter datasikkerhet.</td></tr>
-<tr><td>Ledelse / Styre</td><td>Forankrer og håndhever retningslinjene. Tildeler ressurser til sikker KI-infrastruktur.</td></tr>
-</table>
-
-<!-- 11. AVVIKSRAPPORTERING -->
-<h1 class="section">11. Avviksrapportering</h1>
-<p>Hvis konfidensielle data ved en feil er lagt inn i et ikke-godkjent KI-verktøy:</p>
-<ol class="steps">
-  <li><strong>Stopp</strong> bruken av verktøyet umiddelbart.</li>
-  <li><strong>Dokumenter</strong> hvilke data som ble lagt inn og hvilket verktøy.</li>
-  <li><strong>Meld fra</strong> til KI-gruppen og IT-avdelingen innen 24 timer.</li>
-  <li><strong>Slett</strong> samtalen eller dataene hvis mulig.</li>
-</ol>
-<p>Ingen sanksjoner for ærlige feil som meldes fortløpende. Gjentatte eller forsettlige overtredelser håndteres gjennom ordinære HR-rutiner.</p>
-<div class="callout warn">Etter GDPR kan Dark Design Group være forpliktet til å varsle Datatilsynet innen 72 timer dersom hendelsen omfatter personopplysninger og medfører risiko for fysiske personers rettigheter.</div>
-
-<!-- 12. OPPLÆRING -->
-<h1 class="section">12. Opplæring og bevisstgjøring</h1>
-<ul class="bullets">
-  <li><strong>Onboarding-opplæring</strong> for alle nye medarbeidere</li>
-  <li><strong>Kvartalsvise oppdateringer</strong> når verktøy eller retningslinjer endres</li>
-  <li><strong>Frivillige workshops</strong> om effektiv og sikker KI-bruk</li>
-  <li><strong>Hurtigreferansekort</strong> i fellesarealer og digitalt</li>
-</ul>
-
-<!-- 13. GJENNOMGANG -->
-<h1 class="section">13. Gjennomgang og oppdateringer</h1>
-<ul class="bullets">
-  <li><strong>Kvartalsvis</strong>, eller ved endring i verktøypolicyer</li>
-  <li><strong>Umiddelbart</strong> etter dataavvik</li>
-  <li><strong>Hver gang</strong> et nytt KI-verktøy legges til</li>
-</ul>
-
-<!-- HURTIGREFERANSE -->
-<h1 class="section">Hurtigreferansekort</h1>
-<p style="font-size:16px;font-weight:600;color:var(--black);margin-bottom:16px;">Kan jeg bruke disse dataene med KI?</p>
-
-<table class="th-indigo"><tr><th>Spørsmål</th><th>Hvis ja</th><th>Hvis nei</th></tr>
-<tr><td>Er dataene allerede offentlige?</td><td>Bruk fritt</td><td>Gå til neste spørsmål</td></tr>
-<tr><td>Er det internt, ikke prosjektspesifikt?</td><td>Godkjente verktøy, fjern identifikatorer</td><td>Gå til neste spørsmål</td></tr>
-<tr><td>Er det klient-/prosjektspesifikt?</td><td>KUN Copilot Studio, anonymiser først</td><td>Gå til neste spørsmål</td></tr>
-<tr><td>Er det NDA, sikkerhet, tilbud, anbud?</td><td>SKAL IKKE BRUKES med KI</td><td>I/A</td></tr>
-</table>
-
-<div class="quick-ref">Er du i tvil, ikke legg det inn. Kontakt Alexander, Marco eller Maria i KI-gruppen.</div>
 
 <div class="footer">
-  <p>Dette er et levende dokument som vil utvikle seg i takt med KI-teknologien og Dark Design Groups bruk.</p>
-  <p>Spørsmål, forslag og tilbakemeldinger er velkomne fra alle studioer.</p>
-  <p class="brand">Dark Design Group · Dark Arkitekter · Lark Landskap · Zinc Interior · HK Arkitekter</p>
+  <p>Teknologi og Innovasjon · <span class="brand">Dark Design Group</span></p>
+  <p style="margin-top: 4px;">Dark Arkitekter · Lark Landskap · Zinc Interior · HK Arkitekter</p>
 </div>
 
-</div>
 </body>
 </html>
