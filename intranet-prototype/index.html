@@ -130,7 +130,7 @@ function App() {
                       <div>
                         <div style={s.searchResultTitle}>{r.title}</div>
                         <div style={s.searchResultMeta}>
-                          {r.kind === "course" ? "Course · Learning Platform" : `${r.category} · ${SITES[r.site]?.label}`}
+                          {r.kind === "course" ? "Course · Learning Platform" : `${r.category} · ${(SITES[r.site] || {}).label}`}
                         </div>
                       </div>
                     </div>
@@ -210,7 +210,7 @@ function App() {
             </div>
             {NEWS.map((n, i) => (
               <div key={i} style={s.newsItem} className="news-item" onClick={() => setActiveSite(n.site)}>
-                <div style={{ ...s.newsTag, background: SITES[n.site]?.color + "18", color: SITES[n.site]?.color }}>{n.tag}</div>
+                <div style={{ ...s.newsTag, background: (SITES[n.site] || {}).color + "18", color: (SITES[n.site] || {}).color }}>{n.tag}</div>
                 <div style={s.newsTitle}>{n.title}</div>
                 <div style={s.newsMeta}>{n.date}</div>
               </div>
@@ -398,7 +398,7 @@ function levelStyle(level) {
 // ─── STYLES ─────────────────────────────────────────────────
 
 const s = {
-  root: { fontFamily: "'DM Sans', system-ui, sans-serif", background: "#F8F6F2", color: "#2A2520", minHeight: "100vh", display: "flex", flexDirection: "column" },
+  root: { fontFamily: "'DM Sans', 'Segoe UI', sans-serif", background: "#F8F6F2", color: "#2A2520", minHeight: "100vh", display: "flex", flexDirection: "column" },
   globalBar: { background: "#1A1613", borderBottom: "1px solid #2E2825" },
   globalBarInner: { maxWidth: 1200, margin: "0 auto", padding: "0 28px", height: 52, display: "flex", alignItems: "center", gap: 24 },
   globalLogo: { display: "flex", alignItems: "center", gap: 10, flexShrink: 0 },
@@ -429,13 +429,13 @@ const s = {
   hubHeroGrid: { display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "flex-end" },
   studioChip: { background: "#EFECE6", color: "#6B6560", fontSize: 11, padding: "4px 12px", borderRadius: 100, letterSpacing: "0.02em" },
   eyebrow: { fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase", color: "#A09880", marginBottom: 10 },
-  hubTitle: { fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: 44, fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05, marginBottom: 12, color: "#1A1613" },
+  hubTitle: { fontFamily: "Georgia, serif", fontSize: 44, fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05, marginBottom: 12, color: "#1A1613" },
   hubSub: { fontSize: 15, color: "#6B6560", lineHeight: 1.65, maxWidth: 540, fontWeight: 300 },
   hubCards: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 56 },
   hubCard: { background: "#fff", border: "1px solid #E8E4DE", borderRadius: 10, overflow: "hidden", cursor: "pointer", boxShadow: "0 1px 8px rgba(0,0,0,0.04)", position: "relative" },
   hubCardAccent: { height: 3 },
   hubCardIcon: { fontSize: 24, padding: "20px 20px 4px", color: "#C8B89A" },
-  hubCardTitle: { fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: 16, fontWeight: 600, padding: "0 20px 8px", letterSpacing: "-0.01em" },
+  hubCardTitle: { fontFamily: "Georgia, serif", fontSize: 16, fontWeight: 600, padding: "0 20px 8px", letterSpacing: "-0.01em" },
   hubCardDesc: { fontSize: 12, color: "#7A756F", padding: "0 20px 16px", lineHeight: 1.6 },
   hubCardFooter: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 20px", borderTop: "1px solid #F0ECE6" },
   hubCardCount: { fontSize: 11, color: "#A09880" },
@@ -451,7 +451,7 @@ const s = {
   // Site hero
   siteHero: { padding: "48px 0 40px", borderBottom: "1px solid #E8E4DE", marginBottom: 40, position: "relative" },
   siteHeroAccent: { width: 3, height: "calc(100% - 40px)", position: "absolute", left: -28, top: 0, borderRadius: "0 2px 2px 0" },
-  siteTitle: { fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: 40, fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05, marginBottom: 10, color: "#1A1613" },
+  siteTitle: { fontFamily: "Georgia, serif", fontSize: 40, fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05, marginBottom: 10, color: "#1A1613" },
   siteSub: { fontSize: 14, color: "#6B6560", lineHeight: 1.65, maxWidth: 560, fontWeight: 300 },
   // Doc library
   docLayout: { display: "grid", gridTemplateColumns: "180px 1fr", gap: 48 },
@@ -487,7 +487,7 @@ const s = {
   courseMeta: { display: "flex", gap: 8, marginBottom: 8, alignItems: "center" },
   levelBadge: { fontSize: 10, padding: "3px 8px", borderRadius: 4, fontWeight: 500 },
   courseTag: { fontSize: 10, color: "#A09880", letterSpacing: "0.04em", textTransform: "uppercase" },
-  courseTitle: { fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: 16, fontWeight: 600, lineHeight: 1.3, marginBottom: 7, color: "#1A1613" },
+  courseTitle: { fontFamily: "Georgia, serif", fontSize: 16, fontWeight: 600, lineHeight: 1.3, marginBottom: 7, color: "#1A1613" },
   courseDesc: { fontSize: 12, color: "#7A756F", lineHeight: 1.6, marginBottom: 16 },
   courseFooter: { display: "flex", alignItems: "center", gap: 12, borderTop: "1px solid #F0ECE6", paddingTop: 12 },
   courseStat: { fontSize: 11, color: "#A09880", flex: 1 },
@@ -495,7 +495,7 @@ const s = {
   // Progress
   progressCards: { display: "flex", gap: 1, background: "#E8E4DE", border: "1px solid #E8E4DE", borderRadius: 10, overflow: "hidden", marginBottom: 36 },
   progressCard: { flex: 1, background: "#fff", padding: "24px 20px", textAlign: "center" },
-  progressNum: { fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: 32, fontWeight: 500, color: "#1A1613", marginBottom: 4 },
+  progressNum: { fontFamily: "Georgia, serif", fontSize: 32, fontWeight: 500, color: "#1A1613", marginBottom: 4 },
   progressLbl: { fontSize: 11, color: "#A09880", textTransform: "uppercase", letterSpacing: "0.06em" },
   barLabel: { display: "flex", justifyContent: "space-between", marginBottom: 6 },
   barTrack: { height: 3, background: "#E8E4DE", borderRadius: 2, overflow: "hidden" },
