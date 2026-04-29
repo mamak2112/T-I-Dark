@@ -32,12 +32,3 @@
     "status": "Under utvikling"
   }
 ]
-
-,{
-    "folder": "new-folder-name",
-    "title": "Prosjektnavn",
-    "desc": "Kort beskrivelse.",
-    "tag": "KATEGORI",
-    "color": "#4A3D5A",
-    "status": "Under utvikling"
-  }
