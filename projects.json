@@ -2,7 +2,7 @@
   {
     "folder": "ki-retningslinjer",
     "title": "KI-retningslinjer",
-    "desc": "Retningslinjer for personvern og databeskyttelse ved bruk av kunstig intelligens. Dataklassifisering, godkjente verktøy og praktiske arbeidsflyter.",
+    "desc": "Retningslinjer for personvern og databeskyttelse ved bruk av kunstig intelligens.",
     "tag": "AI X DARK",
     "color": "#4A3D5A",
     "status": "v1.0 · Under utvikling"
@@ -10,13 +10,13 @@
   {
     "folder": "intranet-prototype",
     "title": "SharePoint Hub",
-    "desc": "Interaktiv prototype for Teknologi og Innovasjon-hubben. Hub-og-spoke-arkitektur med BIM, AI, IT og Learning Platform.",
+    "desc": "Interaktiv prototype for Teknologi og Innovasjon-hubben.",
     "tag": "HUB",
     "color": "#3D5A4A",
     "status": "Konseptfase"
   },
   {
-    "folder": "BIM-metodeblader-DARK",
+    "folder": "dark-bim-metodeblader",
     "title": "BIM-metodeblader",
     "desc": "BIM-metodeblader og standarder for Dark Arkitekter.",
     "tag": "BIM X DARK",
@@ -24,7 +24,7 @@
     "status": "Under utvikling"
   },
   {
-    "folder": "Dark Design Set",
+    "folder": "dark-design-set",
     "title": "Dark Design Set",
     "desc": "Designsystem og maler for Dark Design Group.",
     "tag": "DESIGN",
