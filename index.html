@@ -28,11 +28,6 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 .card-footer{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;border-top:1px solid var(--border)}
 .card-status{font-size:11px;color:var(--mid)}
 .card-arrow{font-size:14px;color:var(--mid)}
-.card-empty{background:var(--bg);border:2px dashed var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:200px;cursor:default}
-.card-empty:hover{transform:none;box-shadow:none}
-.card-empty-inner{text-align:center;padding:24px}
-.card-empty-icon{font-size:28px;color:var(--border);margin-bottom:10px}
-.card-empty-text{font-size:13px;color:var(--light)}
 .loading{padding:80px 48px;text-align:center;color:var(--mid);font-size:14px}
 .footer{border-top:1px solid var(--border);padding:24px 48px;text-align:center;margin-top:auto}
 .footer p{font-size:11px;color:var(--light)}
@@ -45,27 +40,38 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 <div class="grid" id="grid"><div class="loading">Laster prototyper...</div></div>
 <div class="footer"><p>Teknologi og Innovasjon · <span class="brand">Dark Design Group</span></p><p style="margin-top:4px">Dark Arkitekter · Lark Landskap · Zinc Interior · HK Arkitekter</p></div>
 <script>
-fetch('./projects.json').then(function(r){return r.json()}).then(function(projects){
-  var grid=document.getElementById('grid');
-  var html='';
-  for(var i=0;i<projects.length;i++){
-    var p=projects[i];
-    html+='<a class="card" href="./'+encodeURI(p.folder)+'/">'
-      +'<div class="card-accent" style="background:'+p.color+'"></div>'
-      +'<div class="card-body">'
-      +'<div class="card-label" style="color:'+p.color+'">'+p.tag+'</div>'
-      +'<div class="card-title">'+p.title+'</div>'
-      +'<div class="card-desc">'+p.desc+'</div>'
-      +'</div>'
-      +'<div class="card-footer">'
-      +'<span class="card-status">'+p.status+'</span>'
-      +'<span class="card-arrow">&rarr;</span>'
-      +'</div></a>';
-  }
-  html+='<div class="card card-empty"><div class="card-empty-inner"><div class="card-empty-icon">+</div><div class="card-empty-text">Neste prototype</div></div></div>';
-  grid.innerHTML=html;
-}).catch(function(){
-  document.getElementById('grid').innerHTML='<div class="loading">Kunne ikke laste projects.json</div>';
+var COLORS=['#4A3D5A','#3D5A4A','#3D4A5A','#5A3D3D','#5A4A3D','#3D5A5A'];
+var SKIP=['index.html','README.md','projects.json','.gitignore','CNAME','_config.yml'];
+function cleanName(f){return f.replace(/^dark-/i,'').replace(/-/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase()});}
+fetch('https://api.github.com/repos/mamak2112/T-I-Dark/contents/')
+.then(function(r){return r.json()})
+.then(function(items){
+var folders=[];
+for(var i=0;i<items.length;i++){if(items[i].type==='dir'&&SKIP.indexOf(items[i].name)===-1){folders.push(items[i].name)}}
+folders.sort();
+var grid=document.getElementById('grid');
+var html='';
+for(var j=0;j<folders.length;j++){
+var name=folders[j];
+var color=COLORS[j%COLORS.length];
+var title=cleanName(name);
+html+='<a class="card" href="./'+encodeURI(name)+'/">'
++'<div class="card-accent" style="background:'+color+'"></div>'
++'<div class="card-body">'
++'<div class="card-label" style="color:'+color+'">'+title.toUpperCase()+'</div>'
++'<div class="card-title">'+title+'</div>'
++'<div class="card-desc">Klikk for å åpne prototype.</div>'
++'</div>'
++'<div class="card-footer">'
++'<span class="card-status">'+name+'</span>'
++'<span class="card-arrow">&rarr;</span>'
++'</div></a>'
+}
+grid.innerHTML=html
+})
+.catch(function(e){
+document.getElementById('grid').innerHTML='<div class="loading">Kunne ikke laste prototyper.</div>';
+console.error(e)
 });
 </script>
 </body>
